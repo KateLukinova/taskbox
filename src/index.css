@@ -4,21 +4,47 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-size: 100%;
-  outline: none;
-  font-family: "Nunito Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-style: 400;
-  color: #333;
-  font-size: 16px;
-  background-color: #26c6da;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
+html {
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+  font-size: 0.69vw;
+  width: 100vw;
+  min-width: 100vw;
+  height: max-content;
+  min-height: 100vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/*@media (max-width: $tablet) {*/
+/*  html {*/
+/*    font-size: 1.3vw;*/
+/*  }*/
+/*}*/
+
+/*@media (max-width: $mob) {*/
+/*  html {*/
+/*    font-size: 3.2vw;*/
+/*  }*/
+/*}*/
+
+body {
+  /*color: $black;*/
+  /*background: $white-bg-color;*/
+  overflow-x: hidden;
+  /*font-family: $font-family-sans-serif;*/
+  font-size: 1.4rem;
+  line-height: 1.5;
+  width: 100%;
+  height: max-content;
+  min-height: 100vh;
 }
 
 h1,
