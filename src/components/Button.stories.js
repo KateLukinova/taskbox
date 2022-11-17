@@ -10,13 +10,10 @@ export default {
 };
 
 const Template = (args) => ({
-    // Компоненты, используемые в «шаблоне» вашей истории, определяются в объекте «components»
     components: { MButton },
-    // Аргументы истории необходимо сопоставить с шаблоном с помощью метода setup()
     setup() {
         return { args };
     },
-    // А затем `args` привязываются к вашему компоненту с помощью `v-bind="args"`
     template: '<MButton v-bind="args" />',
 });
 
@@ -43,8 +40,8 @@ Small.args = {
     label: 'Кнопка',
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
+export const Dark = Template.bind({});
+Dark.args = {
     size: 'large',
     label: 'Кнопка',
 };

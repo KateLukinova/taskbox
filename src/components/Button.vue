@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+  <button type="button" :disabled="disabled" :class="classes" @click="onClick" :style="style">{{ label }}</button>
 </template>
 
 
@@ -22,6 +22,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    dark: {
+      type: Boolean,
+      default: false,
+    },
     size: {
       type: String,
       validator: function (value) {
@@ -41,7 +45,7 @@ export default {
       classes: computed(() => ({
         'button': true,
         'button--primary': props.primary,
-        'button--disabled': props.disabled,
+        'button--dark': props.dark,
         'button--secondary': !props.primary,
         [`button--${props.size || 'medium'}`]: true,
       })),
@@ -62,9 +66,9 @@ $secondary-color: #9595C5;
 $violet-accent-color: #7C65BE;
 $violet-medium-color: #9989C9;
 $violet-light-color: #F3F1FF;
-
 $white: #FFFFFF;
 $black: #3A3A3C;
+$rose-gold: #F2BFA4;
 
 
 .button {
@@ -105,6 +109,21 @@ $black: #3A3A3C;
     }
   }
 
+  &--dark {
+    border: 0.1rem solid $white;
+    background-color: transparent;
+    color: $white;
+
+    &:hover {
+      opacity: 0.75;
+    }
+
+    &:focus {
+      border: 0.1rem solid $rose-gold;
+      color: $rose-gold;
+    }
+  }
+
   &--small {
     font-size: 12px;
     padding: 10px 16px;
@@ -119,7 +138,7 @@ $black: #3A3A3C;
     padding: 1.8rem 4rem;
   }
 
-  &--disabled {
+  &:disabled {
     background-color: $violet-light-color;
     color: $secondary-color;
   }

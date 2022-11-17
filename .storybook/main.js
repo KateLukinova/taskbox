@@ -7,7 +7,8 @@ module.exports = {
     "@storybook/addon-interactions",
     '@storybook/preset-typescript',
     '@storybook/addon-actions',
-    '@storybook/preset-scss'
+    '@storybook/preset-scss',
+    'storybook-dark-mode'
   ],
   framework: "@storybook/vue3",
   core: {

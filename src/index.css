@@ -19,6 +19,10 @@ html {
   scrollbar-width: none;
 }
 
+.darkClass .docs-story {
+  background: rgba(51, 51, 51);
+}
+
 html::-webkit-scrollbar {
   display: none;
 }
@@ -45,6 +49,10 @@ body {
   width: 100%;
   height: max-content;
   min-height: 100vh;
+}
+
+body.dark {
+  background-color: #504871;
 }
 
 h1,
