@@ -6,7 +6,7 @@
 
 <script>
 export default {
-    name: 'IconUI',
+    name: 'MIcon',
     props: {
         name: {type: String, required: true},
         fillColor: {type: String, default: ''},
@@ -17,7 +17,9 @@ export default {
 
 <style lang="scss">
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: currentColor;
+  stroke: currentColor;
 }
 </style>

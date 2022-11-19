@@ -17,6 +17,7 @@ const Template = (args) => ({
 
 export const Dark = Template.bind({});
 Dark.args = {
+    uppercase: false,
     label: 'ссылка',
     href: '#'
 };

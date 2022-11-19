@@ -1,4 +1,4 @@
-import Icon from './IconUI.vue';
+import Icon from './Icon.vue';
 
 export default {
     component: Icon,

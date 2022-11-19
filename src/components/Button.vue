@@ -1,13 +1,19 @@
 <template>
-  <button type="button" :disabled="disabled" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+  <button type="button" :disabled="disabled" :class="classes" @click="onClick">
+    <m-icon :name="icon" v-if="icon"></m-icon>
+    {{ label }}
+  </button>
 </template>
 
 
 <script>
 import { reactive, computed } from 'vue';
+import MIcon from "@/components/Icon.vue";
 
 export default {
   name: "MButton",
+
+  components: { MIcon },
 
   props: {
     label: {
@@ -16,7 +22,7 @@ export default {
     },
     primary: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     disabled: {
       type: Boolean,
@@ -26,15 +32,23 @@ export default {
       type: Boolean,
       default: false,
     },
+    white: {
+      type: Boolean,
+      default: false,
+    },
     size: {
       type: String,
       validator: function (value) {
         return ['small', 'medium', 'large'].indexOf(value) !== -1;
       },
     },
-    backgroundColor: {
-      type: String,
+    icon: {
+      type: String
     },
+    float: {
+      type: Boolean,
+      default: false
+    }
   },
 
   emits: ['click'],
@@ -46,11 +60,10 @@ export default {
         'button': true,
         'button--primary': props.primary,
         'button--dark': props.dark,
+        'button--white': props.white,
+        'button--float': props.float,
         'button--secondary': !props.primary,
         [`button--${props.size || 'medium'}`]: true,
-      })),
-      style: computed(() => ({
-        backgroundColor: props.backgroundColor,
       })),
       onClick() {
         emit('click');
@@ -69,6 +82,7 @@ $violet-light-color: #F3F1FF;
 $white: #FFFFFF;
 $black: #3A3A3C;
 $rose-gold: #F2BFA4;
+$retinol-violet: #725FA2;
 
 
 .button {
@@ -88,7 +102,7 @@ $rose-gold: #F2BFA4;
 
   &--primary {
     color: $white;
-    background-color: #725FA2;
+    background-color: $retinol-violet;
 
     &:hover {
       opacity: 0.75;
@@ -105,14 +119,34 @@ $rose-gold: #F2BFA4;
     color: #725FA2;
 
     &:hover {
-      border: 0.1rem solid #725FA2;
+      border: 0.1rem solid $retinol-violet;
+    }
+
+    &:focus {
+      border: 0.2rem solid $primary-color;
+    }
+  }
+
+  &--white {
+    border: none;
+    background-color: transparent;
+    color: $white;
+
+    &:hover {
+      color: $rose-gold;
+      border: none;
+    }
+
+    &:focus {
+      border: none;
+      color: $rose-gold;
     }
   }
 
   &--dark {
-    border: 0.1rem solid $white;
+    border: none;
     background-color: transparent;
-    color: $white;
+    color: $black;
 
     &:hover {
       opacity: 0.75;
@@ -125,8 +159,8 @@ $rose-gold: #F2BFA4;
   }
 
   &--small {
-    font-size: 12px;
-    padding: 10px 16px;
+    font-size: 1.1rem;
+    padding: 1rem 1.6rem;
   }
 
   &--medium {
@@ -136,11 +170,30 @@ $rose-gold: #F2BFA4;
 
   &--large {
     padding: 1.8rem 4rem;
+
+    .icon {
+      width: 1.3rem;
+      height: 1.3rem;
+    }
   }
 
   &:disabled {
     background-color: $violet-light-color;
     color: $secondary-color;
+    pointer-events: none;
+  }
+
+  .icon {
+    margin-right: 1rem;
+  }
+
+  &--float {
+    flex-direction: row-reverse;
+
+    .icon {
+      margin-right: 0;
+      margin-left: 1rem;
+    }
   }
 }
 

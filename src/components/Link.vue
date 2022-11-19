@@ -14,7 +14,7 @@ export default {
       type: String,
       required: true,
     },
-    dark: {
+    white: {
       type: Boolean,
       default: false,
     },
@@ -35,7 +35,7 @@ export default {
     return {
       classes: computed(() => ({
         'link': true,
-        'link--dark': props.dark,
+        'link--white': props.white,
         'link--uppercase': props.uppercase,
       }))
     }
@@ -60,6 +60,12 @@ $rose-gold: #F2BFA4;
   line-height: 1;
   letter-spacing: 0.005em;
   color: $primary-color;
+  text-decoration: none;
+  transition: all 0.5s ease;
+
+  &:hover {
+    opacity: 0.75;
+  }
 
   &--uppercase {
     text-transform: uppercase;
@@ -71,6 +77,10 @@ $rose-gold: #F2BFA4;
 
   &--white {
     color: $white;
+
+    &:hover {
+      color: $rose-gold;
+    }
   }
 
 }

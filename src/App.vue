@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <InboxScreen />
+    <my-header  />
   </div>
 </template>
 
 <script>
-import InboxScreen from './components/InboxScreen.vue';
+import MyHeader from './components/Header.vue';
 
 export default {
   name: 'App',
   components: {
-    InboxScreen
+    MyHeader
   }
 }
 </script>
 
 <style>
 @import "./index.css";
+body {
+  background-color: #504871;
+}
 </style>
