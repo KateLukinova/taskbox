@@ -9,7 +9,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizelegibility;
-  font-size: 0.69vw;
+  font-size: 0.61vw;
   width: 100vw;
   min-width: 100vw;
   height: max-content;
@@ -17,6 +17,24 @@ html {
   overflow-y: scroll;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+@media (max-width: 1440px) {
+  html {
+    font-size: 0.7vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 0.99vw;
+  }
+}
+
+@media (max-width: 736px) {
+  html {
+    font-size: 3.125vw;
+  }
 }
 
 .darkClass .docs-story {
@@ -49,6 +67,7 @@ body {
   width: 100%;
   height: max-content;
   min-height: 100vh;
+  margin: 0;
 }
 
 body.dark {

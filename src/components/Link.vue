@@ -1,4 +1,5 @@
 <template>
+<!--  <router-link :to="href" :class="classes">{{ label }}</router-link>-->
   <a :href="href" :class="classes">{{ label }}</a>
 </template>
 
@@ -18,9 +19,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    violet: {
+      type: Boolean,
+      default: false,
+    },
+    black: {
+      type: Boolean,
+      default: false,
+    },
     uppercase: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     href: {
       type: String,
@@ -35,7 +44,9 @@ export default {
     return {
       classes: computed(() => ({
         'link': true,
+        'link--black': props.black,
         'link--white': props.white,
+        'link--violet': props.violet,
         'link--uppercase': props.uppercase,
       }))
     }
@@ -43,6 +54,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 
 $primary-color: #504871;
 $secondary-color: #9595C5;
@@ -52,6 +64,8 @@ $violet-light-color: #F3F1FF;
 $white: #FFFFFF;
 $black: #3A3A3C;
 $rose-gold: #F2BFA4;
+$retinol-violet: #725FA2;
+$liftactivator-violet: #504871;
 
 
 .link {
@@ -59,13 +73,9 @@ $rose-gold: #F2BFA4;
   font-size: 1.1rem;
   line-height: 1;
   letter-spacing: 0.005em;
-  color: $primary-color;
+  color: $retinol-violet;
   text-decoration: none;
   transition: all 0.5s ease;
-
-  &:hover {
-    opacity: 0.75;
-  }
 
   &--uppercase {
     text-transform: uppercase;
@@ -77,6 +87,22 @@ $rose-gold: #F2BFA4;
 
   &--white {
     color: $white;
+
+    &:hover {
+      color: $rose-gold;
+    }
+  }
+
+  &--black {
+    color: $black;
+
+    &:hover {
+      color: $rose-gold;
+    }
+  }
+
+  &--violet {
+    color: $liftactivator-violet;
 
     &:hover {
       color: $rose-gold;

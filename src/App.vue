@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <my-header  />
+    <div style="height: 130vh; background-color: #504871; margin-bottom: 10rem"></div>
   </div>
 </template>
 

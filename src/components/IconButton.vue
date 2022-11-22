@@ -1,7 +1,6 @@
 <template>
   <button type="button" :disabled="disabled" :class="classes" @click="onClick">
-    <m-icon :name="icon" v-if="icon"></m-icon>
-    <span class="button__label" v-if="label">{{ label }}</span>
+    <m-icon :name="icon"></m-icon>
   </button>
 </template>
 
@@ -11,7 +10,7 @@ import { reactive, computed } from 'vue';
 import MIcon from "@/components/Icon.vue";
 
 export default {
-  name: "MButton",
+  name: "IconButton",
 
   components: { MIcon },
 
@@ -44,10 +43,6 @@ export default {
     },
     icon: {
       type: String
-    },
-    float: {
-      type: Boolean,
-      default: false
     }
   },
 
@@ -57,13 +52,12 @@ export default {
     props = reactive(props);
     return {
       classes: computed(() => ({
-        'button': true,
-        'button--primary': props.primary,
-        'button--black': props.black,
-        'button--white': props.white,
-        'button--float': props.float,
-        'button--secondary': !props.primary,
-        [`button--${props.size || 'medium'}`]: true,
+        'icon-button': true,
+        'icon-button--primary': props.primary,
+        'icon-button--black': props.black,
+        'icon-button--white': props.white,
+        'icon-button--secondary': !props.primary,
+        [`icon-button--${props.size || 'medium'}`]: true,
       })),
       onClick() {
         emit('click');
@@ -84,8 +78,20 @@ $black: #3A3A3C;
 $rose-gold: #F2BFA4;
 $retinol-violet: #725FA2;
 
+$tablet: 1024px;
+$mob: 736px;
 
-.button {
+$gutter1: 1rem;
+$gutter16: 1.6rem;
+$gutter24: 2.4rem;
+$gutter32: 3.2rem;
+$gutter48: 4.8rem;
+$gutter56: 5.6rem;
+$gutter72: 7.2rem;
+$gutter80: 8rem;
+
+
+.icon-button {
   border: 0;
   border-radius: 0.8rem;
   cursor: pointer;
@@ -116,7 +122,7 @@ $retinol-violet: #725FA2;
   &--secondary {
     border: 0.1rem solid transparent;
     background-color: transparent;
-    color: #725FA2;
+    color: $retinol-violet;
 
     &:hover {
       border: 0.1rem solid $retinol-violet;
@@ -159,8 +165,12 @@ $retinol-violet: #725FA2;
   }
 
   &--small {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     padding: 1rem 1.6rem;
+
+    @media (max-width: $mob) {
+      padding: 0.5rem;
+    }
   }
 
   &--medium {
@@ -171,9 +181,13 @@ $retinol-violet: #725FA2;
   &--large {
     padding: 1.8rem 4rem;
 
+    @media (max-width: $mob) {
+      padding: 0.5rem;
+    }
+
     .icon {
-      width: 1.3rem;
-      height: 1.3rem;
+      width: 1.8rem;
+      height: 1.8rem;
     }
   }
 
@@ -181,19 +195,6 @@ $retinol-violet: #725FA2;
     background-color: $violet-light-color;
     color: $secondary-color;
     pointer-events: none;
-  }
-
-  .icon {
-    margin-right: 1rem;
-  }
-
-  &--float {
-    flex-direction: row-reverse;
-
-    .icon {
-      margin-right: 0;
-      margin-left: 1rem;
-    }
   }
 }
 
