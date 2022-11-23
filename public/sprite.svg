@@ -21,7 +21,17 @@
         <path d="M17 18H3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     </symbol>
 
+    <symbol id="chevron-down" viewBox="0 0 24 24" fill="none">
+        <path d="M6 9L12 15L18 9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
 
+    <symbol id="chevron-right" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
 
+    <symbol id="close" viewBox="0 0 24 24" fill="none">
+        <path d="M18 6L6 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M6 6L18 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
 
 </svg>

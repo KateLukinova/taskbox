@@ -68,6 +68,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 
+
 $primary-color: #504871;
 $secondary-color: #9595C5;
 $violet-accent-color: #7C65BE;
@@ -77,6 +78,8 @@ $white: #FFFFFF;
 $black: #3A3A3C;
 $rose-gold: #F2BFA4;
 $retinol-violet: #725FA2;
+$liftactivator-violet: #504871;
+
 
 $tablet: 1024px;
 $mob: 736px;
@@ -159,8 +162,8 @@ $gutter80: 8rem;
     }
 
     &:focus {
-      border: 0.1rem solid $rose-gold;
-      color: $rose-gold;
+      color: $liftactivator-violet;
+      background-color: transparent;
     }
   }
 

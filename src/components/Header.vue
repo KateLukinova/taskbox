@@ -5,11 +5,23 @@
         <img v-if="headerSimple" src="@/assets/img/logo-simple.svg" alt="logo" >
         <img v-else src="@/assets/img/logo.png" alt="logo">
       </a>
-      <nav class="menu">
+      <nav class="menu" v-bind:class="{ 'show': menuMobile }">
         <ul>
           <li>
             <div class="menu__dropdown" @click.prevent="collapse = !collapse">
-              <m-link role="link" aria-disabled="true" label="Каталог" :white="white" :violet="violet" uppercase/>
+              <m-link
+                  role="link"
+                  aria-disabled="true"
+                  label="Каталог"
+                  :white="white"
+                  :violet="violet"
+                  uppercase/>
+              <icon-button
+                  v-bind:class="{ 'opened': collapse }"
+                  class="menu__arrow"
+                  black
+                  size="large"
+                  icon="chevron-down"/>
               <div class="menu__collapse" v-bind:class="{ 'opened': collapse }">
                 <div class="menu__collapse-item" @click="submenuOne = true">Тип средств</div>
                 <div class="menu__collapse-item" @click="submenuTwo = true">Потребности кожи</div>
@@ -17,26 +29,58 @@
                 <div class="menu__collapse-item" @click="submenuFour = true">Коллеция</div>
               </div>
               <nav class="submenu">
-                <ul>
-                  <li class="submenu__title">ТИП СРЕДСТВ</li>
+                <ul v-bind:class="{ 'show': submenuOne }">
+                  <li class="submenu__title">
+                    <icon-button
+                        @click="submenuOne = false"
+                        class="submenu__arrow"
+                        black
+                        size="large"
+                        icon="chevron-right"/>
+                    ТИП СРЕДСТВ
+                  </li>
                   <li v-for="(link, index) in linksOne" :key="index">
                     <m-link :href="link.href" :label="link.label" black/>
                   </li>
                 </ul>
-                <ul>
-                  <li class="submenu__title">ПОТРЕБНОСТИ КОЖИ</li>
+                <ul v-bind:class="{ 'show': submenuTwo }">
+                  <li class="submenu__title">
+                    <icon-button
+                        @click="submenuTwo = false"
+                        class="submenu__arrow"
+                        black
+                        size="large"
+                        icon="chevron-right"/>
+                    ПОТРЕБНОСТИ КОЖИ
+                  </li>
                   <li v-for="(link, index) in linksTwo" :key="index">
                     <m-link :href="link.href" :label="link.label" black/>
                   </li>
                 </ul>
-                <ul>
-                  <li class="submenu__title">Тип кожи</li>
+                <ul v-bind:class="{ 'show': submenuThree }">
+                  <li class="submenu__title">
+                    <icon-button
+                        @click="submenuThree = false"
+                        class="submenu__arrow"
+                        black
+                        size="large"
+                        icon="chevron-right"/>
+                    Тип кожи
+                  </li>
                   <li v-for="(link, index) in linksThree" :key="index">
                     <m-link :href="link.href" :label="link.label" black/>
                   </li>
                 </ul>
-                <ul>
-                  <li class="submenu__title">Коллекция</li>
+                <ul v-bind:class="{ 'show': submenuFour }">
+                  <li class="submenu__title">
+                    <icon-button
+                        @click="submenuFour = false"
+                        class="submenu__arrow"
+                        black
+                        size="large"
+                        icon="chevron-right"/>
+                    Коллекция
+                  </li>
                   <li v-for="(link, index) in linksFour" :key="index">
                     <m-link :href="link.href" :label="link.label" black/>
                   </li>
@@ -53,7 +97,7 @@
           </li>
         </ul>
       </nav>
-      <div class="button-box" style="display: none">
+      <div class="button-box button-box--desktop">
         <m-button
             :white="white"
             size="small"
@@ -71,15 +115,16 @@
             size="small"
             label="Купить"/>
       </div>
-      <div class="button-box">
+      <div class="button-box button-box--mobile">
         <icon-button
             :white="white"
             :black="black"
             size="large"
             icon="search"/>
         <icon-button
+            @click="menuMobileShowed()"
             float
-            icon="burger"
+            :icon="menuIcon"
             :black="black"
             :white="white"
             size="large"/>
@@ -102,6 +147,8 @@ export default {
   },
   data() {
     return {
+      menuIcon: 'burger',
+      menuMobile: false,
       collapse: false,
       submenuOne: false,
       submenuTwo: false,
@@ -178,8 +225,14 @@ export default {
       }
       this.lastScrollTop = sticky <= 0 ? 0 : sticky;
     },
-    collapsed() {
-      this.collapse = !this.collapse
+    menuMobileShowed() {
+      this.menuMobile = !this.menuMobile
+
+      if ( this.menuMobile === true ) {
+        this.menuIcon = 'close'
+      } else {
+        this.menuIcon = 'burger'
+      }
     }
   },
   mounted() {
@@ -269,7 +322,7 @@ $gutter80: 8rem;
   .submenu {
     justify-content: space-between;
     align-items: flex-start;
-    padding: 4.8rem 16.8rem;
+    padding: 4.8rem 24rem;
     background-color: white;
     box-sizing: border-box;
     position: absolute;
@@ -284,11 +337,12 @@ $gutter80: 8rem;
 
     @media (max-width: $mob) {
       position: relative;
-      display: none;
+      display: flex;
       justify-content: flex-start;
       align-items: flex-start;
       background-color: transparent;
       padding: 0;
+      transform: none;
     }
 
     ul {
@@ -300,14 +354,29 @@ $gutter80: 8rem;
       @media (max-width: $mob) {
         position: fixed;
         width: 100vw;
-        height: 100vh;
+        height: auto;
+        min-height: 100vh;
         background-color: $white;
-        top: 0;
+        top: 0rem;
         left: 0;
         transform: translateX(-100%);
+        padding: 3.4rem 1.2rem;
+        justify-content: flex-start;
+        border-top: 0.1rem solid $liftactivator-violet;
+        transition: all 0.5s ease;
+
+        &.show {
+          transform: translateX(0);
+        }
       }
 
       li {
+
+        @media (max-width: $mob) {
+          border: none!important;
+          padding: 0.5rem 0!important;
+        }
+
         a.link {
           font-size: 1.4rem;
           line-height: 1.5;
@@ -321,6 +390,21 @@ $gutter80: 8rem;
       text-transform: uppercase;
       color: $black;
       margin-bottom: 2.4rem;
+
+      @media (max-width: $mob) {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 0;
+      }
+    }
+
+    &__arrow.icon-button {
+      display: none;
+
+      @media (max-width: $mob) {
+        display: flex;
+      }
     }
   }
 
@@ -359,6 +443,14 @@ $gutter80: 8rem;
       height: 100vh;
       background-color: $white;
       border-top: 0.1rem solid $secondary-color;
+      padding: 0 1.2rem;
+      box-sizing: border-box;
+      transform: translateX(-100%);
+      transition: all 0.5s ease;
+
+      &.show {
+        transform: translateX(0);
+      }
     }
 
     &__dropdown {
@@ -369,12 +461,12 @@ $gutter80: 8rem;
         background-image: url('@/assets/img/catalog-border.svg');
         background-repeat: no-repeat;
         background-size: 105.6%;
-        width: 136rem;
-        height: 2.3rem;
+        width: 158rem;
+        height: 2.5rem;
         position: absolute;
         top: auto;
         bottom: -4rem;
-        left: -53.7rem;
+        left: -63rem;
         z-index: 1;
         display: none;
         opacity: 0;
@@ -418,13 +510,51 @@ $gutter80: 8rem;
       }
     }
 
-    &__collapse {
-      padding: 0.5rem 0;
-      height: 0;
-      overflow: hidden;
+    &__arrow.icon-button {
+      display: none;
+
+      @media (max-width: $mob) {
+        display: flex;
+        transition: all 0.5s ease;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
 
       &.opened {
-        height: 20rem;
+        transform: rotate(180deg);
+      }
+
+    }
+
+    &__collapse {
+      display: none;
+
+      @media (max-width: $mob) {
+        display: flex;
+        flex-direction: column;
+        padding: 0.01rem 0;
+        height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease;
+      }
+
+      &.opened {
+        height: 11.5rem;
+      }
+    }
+
+    &__collapse-item {
+      font-family: sans-serif;
+      font-size: 1.4rem;
+      line-height: 1.5;
+
+      &:nth-child(1) {
+        padding-top: 1.8rem;
+      }
+
+      &:nth-last-child(1) {
+        padding-bottom: 1.8rem;
       }
     }
 
@@ -434,8 +564,13 @@ $gutter80: 8rem;
         padding: 0 1.2rem;
 
         @media (max-width: $mob) {
+          width: 100%;
+          padding: 1.2rem 0;
+          border-bottom: 0.1rem solid $secondary-color;
+
           .link {
             color: $liftactivator-violet;
+            font-size: 1.2rem;
           }
         }
       }
@@ -444,6 +579,22 @@ $gutter80: 8rem;
        flex-direction: column;
        align-items: flex-start;
       }
+    }
+  }
+
+  .button-box--desktop {
+    display: flex;
+
+    @media (max-width: $mob) {
+      display: none;
+    }
+  }
+
+  .button-box--mobile {
+    display: none;
+
+    @media (max-width: $mob) {
+      display: flex;
     }
   }
 

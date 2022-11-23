@@ -83,6 +83,20 @@ $white: #FFFFFF;
 $black: #3A3A3C;
 $rose-gold: #F2BFA4;
 $retinol-violet: #725FA2;
+$liftactivator-violet: #504871;
+
+
+$tablet: 1024px;
+$mob: 736px;
+
+$gutter1: 1rem;
+$gutter16: 1.6rem;
+$gutter24: 2.4rem;
+$gutter32: 3.2rem;
+$gutter48: 4.8rem;
+$gutter56: 5.6rem;
+$gutter72: 7.2rem;
+$gutter80: 8rem;
 
 
 .button {
@@ -153,8 +167,7 @@ $retinol-violet: #725FA2;
     }
 
     &:focus {
-      border: 0.1rem solid $rose-gold;
-      color: $rose-gold;
+      color: $liftactivator-violet;
     }
   }
 

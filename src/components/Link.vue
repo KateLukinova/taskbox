@@ -55,7 +55,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 
-
 $primary-color: #504871;
 $secondary-color: #9595C5;
 $violet-accent-color: #7C65BE;
@@ -68,6 +67,19 @@ $retinol-violet: #725FA2;
 $liftactivator-violet: #504871;
 
 
+$tablet: 1024px;
+$mob: 736px;
+
+$gutter1: 1rem;
+$gutter16: 1.6rem;
+$gutter24: 2.4rem;
+$gutter32: 3.2rem;
+$gutter48: 4.8rem;
+$gutter56: 5.6rem;
+$gutter72: 7.2rem;
+$gutter80: 8rem;
+
+
 .link {
   font-family: sans-serif;
   font-size: 1.1rem;
@@ -76,6 +88,10 @@ $liftactivator-violet: #504871;
   color: $retinol-violet;
   text-decoration: none;
   transition: all 0.5s ease;
+
+  @media (max-width: $mob) {
+    font-size: 1.2rem;
+  }
 
   &--uppercase {
     text-transform: uppercase;
@@ -105,7 +121,7 @@ $liftactivator-violet: #504871;
     color: $liftactivator-violet;
 
     &:hover {
-      color: $rose-gold;
+      color: $secondary-color;
     }
   }
 
