@@ -1,14 +1,22 @@
 <template>
 <!--  <router-link :to="href" :class="classes">{{ label }}</router-link>-->
-  <a :href="href" :class="classes">{{ label }}</a>
+  <a :href="href" :class="classes">
+    <m-icon :name="icon" v-if="icon"></m-icon>
+    <span class="button__label" v-if="label">{{ label }}</span>
+  </a>
 </template>
 
 
 <script>
 import { reactive, computed } from 'vue';
+import MIcon from "@/components/Icon.vue";
+
 
 export default {
   name: "MLink",
+  components: {
+    MIcon
+  },
 
   props: {
     label: {
@@ -27,6 +35,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    gold: {
+      type: Boolean,
+      default: false,
+    },
     uppercase: {
       type: Boolean,
       default: false,
@@ -35,6 +47,13 @@ export default {
       type: String,
       required: true,
     },
+    icon: {
+      type: String
+    },
+    float: {
+      type: Boolean,
+      default: false
+    }
   },
 
   emits: ['click'],
@@ -45,6 +64,8 @@ export default {
       classes: computed(() => ({
         'link': true,
         'link--black': props.black,
+        'link--gold': props.gold,
+        'link--float': props.float,
         'link--white': props.white,
         'link--violet': props.violet,
         'link--uppercase': props.uppercase,
@@ -98,7 +119,7 @@ $gutter80: 8rem;
   }
 
   &--gold {
-    text-transform: $rose-gold;
+    color: $rose-gold;
   }
 
   &--white {
@@ -122,6 +143,21 @@ $gutter80: 8rem;
 
     &:hover {
       color: $secondary-color;
+    }
+  }
+
+  .icon {
+    margin-right: 1rem;
+  }
+
+  &--float {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+
+    .icon {
+      margin-right: 0;
+      margin-left: 1rem;
     }
   }
 

@@ -36,6 +36,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    full: {
+      type: Boolean,
+      default: false,
+    },
     size: {
       type: String,
       validator: function (value) {
@@ -60,6 +64,7 @@ export default {
         'button': true,
         'button--primary': props.primary,
         'button--black': props.black,
+        'button--full': props.full,
         'button--white': props.white,
         'button--float': props.float,
         'button--secondary': !props.primary,
@@ -207,6 +212,10 @@ $gutter80: 8rem;
       margin-right: 0;
       margin-left: 1rem;
     }
+  }
+
+  &--full {
+    width: 100%;
   }
 }
 
